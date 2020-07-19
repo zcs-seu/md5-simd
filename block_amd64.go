@@ -154,7 +154,7 @@ func blockMd5_avx512(s *digest16, input [16][]byte, base []byte, maskRounds *[16
 
 		for j := 0; j < len(ptrs); j++ {
 			ptrs[j] += int32(64 * m.rounds) // update pointers for next round
-			if m.mask&(1<<j) != 0 {         // update digest if still masked as active
+			if m.mask&(1<<uint(j)) != 0 {         // update digest if still masked as active
 				(*s).v0[j], (*s).v1[j], (*s).v2[j], (*s).v3[j] = sdup.v0[j], sdup.v1[j], sdup.v2[j], sdup.v3[j]
 			}
 		}
@@ -191,7 +191,7 @@ func blockMd5_avx2(s *digest8, input [8][]byte, base []byte, maskRounds *[8]mask
 
 		for j := 0; j < len(ptrs); j++ {
 			ptrs[j] += int32(64 * m.rounds) // update pointers for next round
-			if m.mask&(1<<j) != 0 {         // update digest if still masked as active
+			if m.mask&(1<<uint(j)) != 0 {         // update digest if still masked as active
 				(*s).v0[j], (*s).v1[j], (*s).v2[j], (*s).v3[j] = sdup.v0[j], sdup.v1[j], sdup.v2[j], sdup.v3[j]
 			}
 		}
